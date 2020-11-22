@@ -1,0 +1,54 @@
+crossover和playonlonux安装微信很顺利，但是发现聊天输入框无法显示光标与文字，只能复制黏贴。搜索框可以正常使用，但总不能以这种方式使用啊。
+1.替换riched20.dll
+下载win7版本的riched20.dll
+替换drive_c/windows/system32/riched20.dll
+此时，输入框可以显示光标并且能够直接输入英文了，不能输入中文，黏贴中文后可以显示。
+2.中文光标跟随乱码问题解决。
+我们需要安装字体simsun.ttc
+这是在Windows下的宋体字体
+直接百度关键词就可以搜索并下载到
+下载好是zip的压缩包，我们需要将它解压出来。
+这里我们需要的是后缀ttc的字体文件
+将这个文件复制到～/.wine/drive_c/windows/Fonts
+.开头的文件夹是隐藏的，快捷键ctrl+H显示隐藏文件夹～代表home路径
+新建zh.reg
+内容如下：
+REGEDIT4
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]
+"Arial"="simsun"
+"Arial CE,238"="simsun"
+"Arial CYR,204"="simsun"
+"Arial Greek,161"="simsun"
+"Arial TUR,162"="simsun"
+"Courier New"="simsun"
+"Courier New CE,238"="simsun"
+"Courier New CYR,204"="simsun"
+"Courier New Greek,161"="simsun"
+"Courier New TUR,162"="simsun"
+"FixedSys"="simsun"
+"Helv"="simsun"
+"Helvetica"="simsun"
+"MS Sans Serif"="simsun"
+"MS Shell Dlg"="simsun"
+"MS Shell Dlg 2"="simsun"
+"System"="simsun"
+"Tahoma"="simsun"
+"Times"="simsun"
+"Times New Roman CE,238"="simsun"
+"Times New Roman CYR,204"="simsun"
+"Times New Roman Greek,161"="simsun"
+"Times New Roman TUR,162"="simsun"
+"Tms Rmn"="simsun"
+在zh.reg目录下，终端命令：
+regedit zh.reg
+命令执行成功后无任何反应
+这里你的微信就可以显示中文和输入中文没问题列。
+若上述方案失效，那么最直接的方法就是直接安装simsun.ttf字体
+注意后缀为ttf，ttc的无法安装。
+安装后应该就可以了。
+不过这时系统的默认字体就变成宋体了。
+我们需要把默认字体设置为文泉驿微米黑
+就可以了。
+删除安装字体的方法是：
+在home/.local/share/fonts
+目录下有你安装的字体，删除重启即可
